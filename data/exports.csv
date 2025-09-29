@@ -1,0 +1,6 @@
+Product,Order_ID,Customer_Name,Country_Destination,Container_Type,Quantity_MT,Unit_Price_FOB,Total_Value_FOB,Harvest_Date,Origin_Region,Quality_Grade,Specific_Attributes,Shipping_Port,ETD,ETA,Status
+Avocado,AV-2024-001,Fresh Foods EU,Netherlands,Reefer,22,2850,62700,2024-01-15,Michoacán,Hass Extra,"Size: 32-36 count; Dry Matter: >26%; Brix: 12",Veracruz,2024-02-01,2024-02-15,Shipped
+Coffee,CF-2024-045,Specialty Roasters LLC,USA,Dry,18,6800,122400,2024-02-10,Huehuetenango,SHB EP,"Variety: Bourbon; Process: Washed; Screen: 17/18; Cupping Score: 86.5",Puerto Quetzal,2024-03-05,2024-03-25,In Transit
+Cashew,CN-2024-118,Global Nut Distributors,Germany,Dry,25,4200,105000,2024-01-25,Vietnam,W320,"Outturn: 50LBS; Count: 320-360 per lb; Moisture: <5%; Defect: <2%",Port of Ho Chi Minh,2024-02-20,2024-03-28,Delivered
+Avocado,AV-2024-002,Green Markets Ltd,UK,Reefer,15,2950,44250,2024-02-05,Jalisco,Hass I,"Size: 22-26 count; Dry Matter: >24%",Manzanillo,2024-02-25,2024-03-10,Booked
+Coffee,CF-2024-046,Cafe Europa,Italy,Dry,12,7200,86400,2024-03-01,Antioquia,Excelso UGQ,"Variety: Castillo; Process: Natural; Roast: Medium",Port of Buenaventura,2024-03-20,2024-04-15,Processing
