@@ -17,7 +17,6 @@
         font-family: monospace;
         background-color: #000;
         color: #fff;
-        /* overflow: hidden; */
       }
       h1,
       h2,
@@ -38,18 +37,12 @@
       .container {
         height: 100%;
       }
-      .container {
-        font-family: monospace;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 9;
-      }
-      .xcontainer {
+      #content {
         margin: 30px;
+        padding-bottom: 40px;
+        display: block;
       }
-      .page {
+      .page, .header {
         margin: 0 30px;
       }
       table {
@@ -81,7 +74,7 @@
       </style>
   </head>
   <body>
-    <div class="xcontainer">
+    <div class="header">
       <h1>AGRI HUB TRADING</h1>
       <h2>EXPORTS</h2>
     </div>
@@ -90,8 +83,11 @@
       <output>First row must contain headers</output>
     </div>
 
+    <div id="content"></div>
+
     <script src="js/papaparse.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/marked.min.js"></script>
 
     <script>
       window.addEventListener(
@@ -145,6 +141,30 @@
             tbody +
             "</tbody></table>"
         );
+      }
+
+        // create html from md file
+      async function run(here) {
+        content.innerHTML = "";
+        let file = await fetch("pages/" + here + ".md");
+        let text = await file.text();
+        var article = document.createElement("article");
+        article.innerHTML = marked.parse(text);
+        article.id = here;
+        content.appendChild(article);
+        history.replaceState(undefined, undefined, "#" + here);
+        document.body.className = here;
+      }
+
+      // start
+      // load page from URL
+      if (window.location.hash) {
+        var hash = window.location.hash.substring(1);
+        // console.log(hash+' : from url')
+        run(hash);
+        history.replaceState(undefined, undefined, "#" + hash);
+      } else {
+        run("commodities");
       }
     </script>
   </body>
