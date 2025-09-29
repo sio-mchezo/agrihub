@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agri Hub Trading</title>
+
+    <!-- <link rel="stylesheet" href="css/pico.classless.css" /> -->
+    <style>
+      @font-face {
+        font-family: "bebas";
+        src: url("font/bebas-regular-webfont.woff") format("woff"),
+          url("font/bebas-regular-webfont.woff2") format("woff2"),
+          url("font/bebas-regular.ttf") format("truetype");
+      }
+      body {
+        font-family: monospace;
+        background-color: #000;
+        color: #fff;
+        /* overflow: hidden; */
+      }
+      h1,
+      h2,
+      h3 {
+        text-transform: uppercase;
+        display: block;
+        font-family: "bebas";
+        font-weight: 500;
+        font-style: normal;
+        display: block;
+      }
+      h1 {
+        font-size: 50px;
+      }
+
+      html,
+      body,
+      .container {
+        height: 100%;
+      }
+      .container {
+        font-family: monospace;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 9;
+      }
+      .xcontainer {
+        margin: 30px;
+      }
+      .page {
+        margin: 0 30px;
+      }
+      table {
+        width: 100%;
+        font-size: 0.7em;
+      }
+      table {
+        border-collapse: collapse;
+      }
+
+      td,
+      th {
+        border: 1px solid #222;
+        padding: 0.5rem;
+        text-align: left;
+      }
+      td,
+      th {
+        width: 4rem;
+        height: 2rem;
+        text-align: center;
+      }
+      th {
+        border-bottom: maroon 4px solid;
+      }
+      td {
+        /* border-right: maroon 4px solid; */
+      }    
+      </style>
+  </head>
+  <body>
+    <div class="xcontainer">
+      <h1>AGRI HUB TRADING</h1>
+      <h2>EXPORTS</h2>
+    </div>
+
+    <div class="page">
+      <output>First row must contain headers</output>
+    </div>
+
+    <script src="js/papaparse.min.js"></script>
+    <script src="js/jquery.js"></script>
+
+    <script>
+      window.addEventListener(
+        "load",
+        function () {
+          loadXMLDoc();
+        },
+        false
+      );
+
+      window.onload = function (e) {
+        loadXMLDoc();
+      };
+      function loadXMLDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            // document.getElementById("demo").innerHTML = Papa.parse(this.responseText, {header: true}).data[0].mt_global;
+            var papa = Papa.parse(this.responseText, {
+              header: true,
+              dynamicTyping: true,
+              complete: function (results) {
+                printPapaObject(results);
+              },
+            });
+          }
+        };
+        xhttp.open("GET", "data/exports.csv", true);
+        xhttp.send();
+      }
+
+      //printPapaObject accept only construction returned by papaParser (array of objects)
+      function printPapaObject(papa) {
+        var header = "";
+        var tbody = "";
+        for (var p in papa.meta.fields) {
+          header += "<th>" + papa.meta.fields[p] + "</th>";
+        }
+        for (var i = 0; i < papa.data.length; i++) {
+          var row = "";
+          for (var z in papa.data[i]) {
+            row += "<td>" + papa.data[i][z] + "</td>";
+          }
+          tbody += "<tr>" + row + "</tr>";
+        }
+        //build a table
+        $("output").html(
+          '<table class="table"><thead>' +
+            header +
+            "</thead><tbody>" +
+            tbody +
+            "</tbody></table>"
+        );
+      }
+    </script>
+  </body>
+</html>
